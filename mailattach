@@ -1,0 +1,43 @@
+package mailattach;
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+public class Mailattach {
+    public static void main(String[] args) {
+        final String sender = "ranjanib.0709@gmail.com";
+        final String password = "ruga ucxs jcmw vqlt";
+        String receiver = "ranjanib.0705@gmail.com";
+        String file = "C:\\Users\\LENOVO\\Documents\\javalab-op.pdf";
+        Properties p = new Properties();
+        p.put("mail.smtp.host", "smtp.gmail.com");
+        p.put("mail.smtp.port", "587");
+        p.put("mail.smtp.auth", "true");
+        p.put("mail.smtp.starttls.enable", "true");
+        Session s = Session.getInstance(p, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(sender, password);
+            }
+        });
+        try {
+            MimeMessage m = new MimeMessage(s);
+            m.setFrom(sender);
+            m.setRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+            m.setSubject("Email with Attachment");
+            MimeBodyPart text = new MimeBodyPart();
+            text.setText("Hello! Please find the attached file.");
+            MimeBodyPart attach = new MimeBodyPart();
+            DataSource source = new FileDataSource(file);
+            attach.setDataHandler(new DataHandler(source));
+            attach.setFileName(source.getName());
+            Multipart mp = new MimeMultipart();
+            mp.addBodyPart(text);
+            mp.addBodyPart(attach);
+            m.setContent(mp);
+            Transport.send(m);
+            System.out.println("Email sent successfully!");
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+}
