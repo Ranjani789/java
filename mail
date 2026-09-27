@@ -1,0 +1,43 @@
+package javamail;
+import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;
+public class JavaMail {
+    public static void main(String[] args) {
+        final String sender = "ranjanib.0709@gmail.com";
+        final String password = "ruga ucxs jcmw vqlt";
+        final String receiver = "ranjanib.0705@gmail.com";
+        Properties p = new Properties();
+        p.put("mail.smtp.host", "smtp.gmail.com");
+        p.put("mail.smtp.port", "587");
+        p.put("mail.smtp.auth", "true");
+        p.put("mail.smtp.starttls.enable", "true");
+        p.put("mail.smtp.starttls.required", "true");
+        Session session = Session.getInstance(p, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(sender, password);
+            }
+        });
+        try {
+            Message msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress(sender));
+            msg.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse(receiver)
+            );
+            msg.setSubject("Java Mail Test");
+            msg.setText(
+                    "Hello!\n\n"
+                    + "This email is sent using Java Mail API.\n\n"
+                    + "Regards,\n"
+                    + "JavaMail Program"
+            );
+            Transport.send(msg);
+            System.out.println("Email sent successfully!");
+        } catch (MessagingException e) {
+            System.out.println("Email sending failed!");
+            e.printStackTrace();
+        }
+    }
+}
