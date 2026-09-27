@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Redirect</title>
+    </head>
+    <body>
+        <h2>Redirect to Ajio</h2>
+        <form action="Redirect" method="get">
+            <input type="Submit" value="Go to Ajio">
+        </form>
+    </body>
+</html>
+
+import java.io.IOException;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+@WebServlet("/Redirect")
+public class Redirect extends HttpServlet {
+    protected void doGet(HttpServletRequest req,
+                         HttpServletResponse res)
+                         throws IOException {
+      res.sendRedirect("https://www.ajio.com/");
+
+    }
+}
