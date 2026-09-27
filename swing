@@ -1,0 +1,80 @@
+package swingstudent;
+import javax.swing.*;
+import java.awt.event.*;
+
+public class SwingStudent extends JFrame implements ActionListener {
+    JTextField t1, t2;
+    JComboBox<String> c1;
+    ButtonGroup g;
+    JRadioButton cb1, cb2;
+    JLabel l4;
+
+    SwingStudent() {
+        setTitle("SWING STUDENT REGISTRATION");
+        setSize(350, 350);
+        setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JLabel l1 = new JLabel("Roll No:");
+        l1.setBounds(40, 40, 100, 30);
+        add(l1);
+        t1 = new JTextField();
+        t1.setBounds(150, 40, 150, 30);
+        add(t1);
+
+        JLabel l2 = new JLabel("Name:");
+        l2.setBounds(40, 90, 100, 30);
+        add(l2);
+        t2 = new JTextField();
+        t2.setBounds(150, 90, 150, 30);
+        add(t2);
+
+        JLabel l3 = new JLabel("Course:");
+        l3.setBounds(40, 140, 100, 30);
+        add(l3);
+        c1 = new JComboBox<>(new String[]{"BSc CS", "BCA", "BCom"});
+        c1.setBounds(150, 140, 150, 30);
+        add(c1);
+
+        JLabel l5 = new JLabel("Gender:");
+        l5.setBounds(40, 190, 100, 30);
+        add(l5);
+        g = new ButtonGroup();
+        cb1 = new JRadioButton("Male");
+        cb1.setBounds(150, 190, 70, 30);
+        g.add(cb1);
+        add(cb1);
+        cb2 = new JRadioButton("Female");
+        cb2.setBounds(230, 190, 80, 30);
+        g.add(cb2);
+        add(cb2);
+
+        JButton b1 = new JButton("REGISTER");
+        b1.setBounds(80, 240, 100, 40);
+        b1.addActionListener(this);
+        add(b1);
+
+        JButton b2 = new JButton("EXIT");
+        b2.setBounds(190, 240, 100, 40);
+        b2.addActionListener(this);
+        add(b2);
+
+        l4 = new JLabel();
+        l4.setBounds(40, 290, 270, 30);
+        add(l4);
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("REGISTER")) {
+            String gender = cb1.isSelected() ? "Male" : cb2.isSelected() ? "Female" : "Not selected";
+            l4.setText("Registered: " + t1.getText() + " - " + t2.getText() + " - " + c1.getSelectedItem() + " - " + gender);
+        } else {
+            System.exit(0);
+        }
+    }
+
+    public static void main(String args[]) {
+        new SwingStudent();
+    }
+}
