@@ -1,0 +1,80 @@
+package studentform;
+import java.awt.*;
+import java.awt.event.*;
+
+public class StudentForm extends Frame implements ActionListener {
+    TextField t1, t2;
+    Choice c1;
+    CheckboxGroup g;
+    Checkbox cb1, cb2;
+    Label l4;
+
+    StudentForm() {
+        setTitle("STUDENT REGISTRATION");
+        setSize(350, 350);
+        setLayout(null);
+
+        Label l1 = new Label("Roll No:");
+        l1.setBounds(40, 40, 100, 30);
+        add(l1);
+        t1 = new TextField();
+        t1.setBounds(150, 40, 150, 30);
+        add(t1);
+
+        Label l2 = new Label("Name:");
+        l2.setBounds(40, 90, 100, 30);
+        add(l2);
+        t2 = new TextField();
+        t2.setBounds(150, 90, 150, 30);
+        add(t2);
+
+        Label l3 = new Label("Course:");
+        l3.setBounds(40, 140, 100, 30);
+        add(l3);
+        c1 = new Choice();
+        c1.add("BSc CS");
+        c1.add("BCA");
+        c1.add("BCom");
+        c1.setBounds(150, 140, 150, 30);
+        add(c1);
+
+        Label l5 = new Label("Gender:");
+        l5.setBounds(40, 190, 100, 30);
+        add(l5);
+        g = new CheckboxGroup();
+        cb1 = new Checkbox("Male", g, false);
+        cb1.setBounds(150, 190, 70, 30);
+        add(cb1);
+        cb2 = new Checkbox("Female", g, false);
+        cb2.setBounds(230, 190, 80, 30);
+        add(cb2);
+
+        Button b1 = new Button("REGISTER");
+        b1.setBounds(80, 240, 100, 40);
+        b1.addActionListener(this);
+        add(b1);
+
+        Button b2 = new Button("EXIT");
+        b2.setBounds(190, 240, 100, 40);
+        b2.addActionListener(this);
+        add(b2);
+
+        l4 = new Label();
+        l4.setBounds(40, 290, 270, 30);
+        add(l4);
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("REGISTER")) {
+            String gender = (g.getSelectedCheckbox() != null) ? g.getSelectedCheckbox().getLabel() : "Not selected";
+            l4.setText("Registered: " + t1.getText() + " - " + t2.getText() + " - " + c1.getSelectedItem() + " - " + gender);
+        } else {
+            System.exit(0);
+        }
+    }
+
+    public static void main(String args[]) {
+        new StudentForm();
+    }
+}
