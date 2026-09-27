@@ -1,0 +1,35 @@
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet("/sessiontrack")
+public class sessiontrack extends HttpServlet {
+
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+
+        HttpSession session = req.getSession(true);
+        Integer count = (Integer) session.getAttribute("visitCount");
+        if (count == null) count = 0;
+        count++;
+        session.setAttribute("visitCount", count);
+        session.setAttribute("studentName", "Ranjani");
+
+        out.println("<html><body>");
+        out.println("<h2>STUDENT SESSION TRACKING</h2>");
+        out.println("<p>Student: " + session.getAttribute("studentName") + "</p>");
+        out.println("<p>Session ID: " + session.getId() + "</p>");
+        out.println("<p>Number of visits: " + count + "</p>");
+        out.println("</body></html>");
+    }
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        doGet(req, resp);
+    }
+}
+
