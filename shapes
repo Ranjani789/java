@@ -1,0 +1,57 @@
+package shapedemo; 
+import java.applet.Applet; 
+import java.awt.*; 
+public class ShapeDemo extends Applet {     
+public void init() {         
+setBackground(Color.WHITE);         
+setForeground(Color.BLACK);    
+}     
+public void paint(Graphics g) {        
+g.drawString("APPLET PROGRAM", 180, 30);          
+int xt[] = {110, 50, 170};         
+int yt[] = {60, 130, 130};        
+g.setColor(Color.ORANGE);         
+g.fillPolygon(xt, yt, 3);        
+g.setColor(Color.BLACK);        
+g.drawString("Triangle", 90, 150);         
+g.setColor(Color.RED);        
+g.fillRect(50, 170, 130, 60);        
+g.setColor(Color.BLACK);         
+g.drawString("Rectangle", 85, 250);        
+g.setColor(Color.GREEN);        
+g.drawOval(230, 60, 120, 80);     
+g.setColor(Color.BLACK);    
+g.drawString("Oval", 275, 160);       
+int x[] = {250, 290, 330, 330, 290, 250};    
+int y[] = {240, 210, 240, 290, 315, 290};    
+g.setColor(Color.BLUE);    
+g.fillPolygon(x, y, 6);   
+g.setColor(Color.BLACK);    
+g.drawString("Polygon", 270, 335);   
+g.setColor(Color.MAGENTA);      
+g.drawArc(50, 300, 130, 80, 0, 180);       
+g.setColor(Color.BLACK);       
+g.drawString("Arc", 100, 400);  
+} } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
